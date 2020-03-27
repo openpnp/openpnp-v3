@@ -1,7 +1,4 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
+name: Build and Deploy
 
 on:
   push:
@@ -26,3 +23,10 @@ jobs:
         java-version: 14
     - name: Build with Maven
       run: mvn -B package javafx:jlink --file pom.xml
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: openpnp-v3
+        # Directory containing files to upload
+        path: target/image
