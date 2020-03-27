@@ -37,6 +37,7 @@
                 <version>0.0.4</version>
                 <configuration>
                     <mainClass>org.openpnp.openpnp_v3.App</mainClass>
+                    <launcher>launcher</launcher>
                 </configuration>
             </plugin>
         </plugins>
