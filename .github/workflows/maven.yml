@@ -26,5 +26,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: openpnp-v3-${{ run.os }}-${{ github.ref }}
+        name: openpnp-v3-${{ github.ref }}-${{ runner.os }}
         path: target/image
