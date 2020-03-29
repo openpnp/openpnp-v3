@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" fillHeight="false">
          <children>
-            <Circle fx:id="connector" fill="#89d5ff" onMouseClicked="#connect" radius="5.5" strokeType="INSIDE">
+            <Circle fx:id="connector" fill="#89d5ff" onMouseClicked="#connect" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" radius="5.5" strokeType="INSIDE">
                <HBox.margin>
                   <Insets right="6.0" />
                </HBox.margin>

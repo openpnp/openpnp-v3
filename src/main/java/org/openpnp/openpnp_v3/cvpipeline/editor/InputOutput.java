@@ -19,11 +19,33 @@ public abstract class InputOutput extends FxmlComponent {
     private Label name;
     
     private Class<?> type;
+    private boolean active;
+    private boolean highlighted;
     
     public InputOutput(String name, Class<?> type) {
         this.name.setText(name);
         this.type = type;
         connector.setFill(getTypeColor(type));
+    }
+    
+    @FXML
+    private void connect(MouseEvent e) {
+        if (this instanceof Output) {
+            getEditor().startConnect((Output) this);
+        }
+        else {
+            getEditor().finishConnect((Input) this);
+        }
+    }
+    
+    @FXML
+    private void mouseEntered(MouseEvent e) {
+        setHighlighted(true);
+    }
+    
+    @FXML
+    private void mouseExited(MouseEvent e) {
+        setHighlighted(false);
     }
     
     public Color getTypeColor(Class<?> type) {
@@ -68,13 +90,32 @@ public abstract class InputOutput extends FxmlComponent {
         return null;
     }
     
-    @FXML
-    private void connect(MouseEvent e) {
-        if (this instanceof Output) {
-            getEditor().startConnect((Output) this);
+    // TODO STOPSHIP binding?
+    // TODO STOPSHIP CSS
+    private void updateStroke() {
+        if (highlighted) {
+            getConnector().setStroke(Color.GREENYELLOW);
+            getConnector().setStrokeWidth(2);
+        }
+        else if (active) {
+            getConnector().setStroke(Color.ANTIQUEWHITE);
+            getConnector().setStrokeWidth(2);
         }
         else {
-            getEditor().finishConnect((Input) this);
+            getConnector().setStroke(null);
         }
     }
+    
+    public void setActive(boolean active) {
+        this.active = active;
+        updateStroke();
+    }
+    
+    public void setHighlighted(boolean highlighted) {
+        this.highlighted = highlighted;
+        updateStroke();
+    }
 }
+
+
+

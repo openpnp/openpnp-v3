@@ -64,8 +64,10 @@ public class Editor extends FxmlComponent {
          *   so the user can see what they are doing.
          */
         // TODO STOPSHIP this should be CSS
-        output.getConnector().setStroke(Color.ANTIQUEWHITE);
-        output.getConnector().setStrokeWidth(2);
+        // TODO STOPSHIP actually this is all mixing concerns. We should just be setting a
+        // property on the input or output to say it's active.  We also need mouse in and mouse
+        // out to set a second property of highlighted. And these control the colors.
+        output.setActive(true);
         
         for (var node : getChildren()) {
             if (node instanceof Card) {
@@ -77,8 +79,7 @@ public class Editor extends FxmlComponent {
                     if (node1 instanceof Input) {
                         Input input = (Input) node1;
                         if (input.getType().isAssignableFrom(output.getType())) {
-                            input.getConnector().setStroke(Color.ANTIQUEWHITE);
-                            input.getConnector().setStrokeWidth(2);
+                            input.setActive(true);
                         }
                     }
                 }
@@ -103,11 +104,7 @@ public class Editor extends FxmlComponent {
                 for (var node1 : card.getInputs()) {
                     if (node1 instanceof Input) {
                         Input input1 = (Input) node1;
-                        input1.getConnector().setStroke(null);
-//                        if (input.getType().isAssignableFrom(output.getType())) {
-//                            input.getConnector().setStroke(Color.ANTIQUEWHITE);
-//                            input.getConnector().setStrokeWidth(2);
-//                        }
+                        input1.setActive(false);
                     }
                 }
             }
