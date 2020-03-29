@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<fx:root type="Group" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="Pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #353535; -fx-border-color: black; -fx-border-width: 2;">
          <children>
@@ -24,8 +24,16 @@
             </Label>
             <HBox minHeight="30.0">
                <children>
-                  <VBox id="inputs" fx:id="inputs" minHeight="30.0" style="-fx-background-color: #474747;" HBox.hgrow="ALWAYS" />
-                  <VBox fx:id="outputs" alignment="TOP_RIGHT" minHeight="30.0" style="-fx-background-color: #2b2b2b;" HBox.hgrow="ALWAYS" />
+                  <VBox id="inputs" fx:id="inputs" minHeight="30.0" style="-fx-background-color: #474747;" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="outputs" alignment="TOP_RIGHT" minHeight="30.0" style="-fx-background-color: #2b2b2b;" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </VBox>
                </children>
             </HBox>
             <VBox alignment="TOP_CENTER" style="-fx-background-color: #000000;">
