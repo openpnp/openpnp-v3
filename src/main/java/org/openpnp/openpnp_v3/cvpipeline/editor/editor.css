@@ -1,0 +1,69 @@
+.editor-surface {
+	-fx-background-color: #202020;
+}
+
+.card {
+	-fx-background-color: #353535;
+	-fx-border-color: #111111;
+	-fx-border-width: 1;
+	-fx-background-radius: 10 10 0 0;
+	-fx-border-radius: 10 10 0 0;
+}
+
+.card-name {
+	-fx-text-fill: white;
+}
+
+.card-inputs {
+	-fx-background-color: #474747;
+}
+
+.card-outputs {
+	-fx-background-color: #2b2b2b;
+}
+
+.card-images {
+	-fx-background-color: black;
+}
+
+.input-output {
+}
+
+.input {
+	-fx-background-color: #474747;
+}
+
+.output {
+	-fx-background-color: #2b2b2b;
+}
+
+.connector {
+	-fx-fill: #cccccc;
+}
+
+.connector-name {
+	-fx-text-fill: #e8e8e8;
+}
+
+.connector-active {
+	-fx-stroke: red;
+	-fx-stroke-width: 2;
+}
+
+.connector-highlighted {
+	-fx-stroke: yellow;
+	-fx-stroke-width: 2;
+}
+
+.connector-type-image {
+	-fx-fill: #ff776f;
+}
+
+.connector-type-number {
+	-fx-fill: #89d5ff;
+}
+
+.connector-type-object {
+	-fx-fill: #836fff;
+}
+

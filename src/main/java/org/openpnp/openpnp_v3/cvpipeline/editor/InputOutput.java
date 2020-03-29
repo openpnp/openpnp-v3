@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public abstract class InputOutput extends FxmlComponent {
@@ -25,7 +24,16 @@ public abstract class InputOutput extends FxmlComponent {
     public InputOutput(String name, Class<?> type) {
         this.name.setText(name);
         this.type = type;
-        connector.setFill(getTypeColor(type));
+        
+        if (type.isAssignableFrom(BufferedImage.class)) {
+            connector.getStyleClass().add("connector-type-image");
+        }
+        else if (type.isAssignableFrom(Integer.class)) {
+            connector.getStyleClass().add("connector-type-number");
+        }
+        else {
+            connector.getStyleClass().add("connector-type-object");
+        }
     }
     
     @FXML
@@ -46,18 +54,6 @@ public abstract class InputOutput extends FxmlComponent {
     @FXML
     private void mouseExited(MouseEvent e) {
         setHighlighted(false);
-    }
-    
-    public Color getTypeColor(Class<?> type) {
-        if (type.isAssignableFrom(BufferedImage.class)) {
-            return new Color(0xff / 255.0, 0x77 / 255.0, 0x6f / 255.0, 1.0);
-        }
-        else if (type.isAssignableFrom(Integer.class)) {
-            return new Color(0x89 / 255.0, 0xd5 / 255.0, 0xff / 255.0, 1.0);
-        }
-        else {
-            return new Color(0x83 / 255.0, 0x6f / 255.0, 0xff / 255.0, 1.0);
-        }
     }
     
     public String getName() {
@@ -90,30 +86,35 @@ public abstract class InputOutput extends FxmlComponent {
         return null;
     }
     
-    // TODO STOPSHIP binding?
-    // TODO STOPSHIP CSS
-    private void updateStroke() {
+    private void updateStateStyle() {
         if (highlighted) {
-            getConnector().setStroke(Color.GREENYELLOW);
-            getConnector().setStrokeWidth(2);
+            while (connector.getStyleClass().remove("connector-active"));
+            connector.getStyleClass().add("connector-highlighted");
         }
         else if (active) {
-            getConnector().setStroke(Color.ANTIQUEWHITE);
-            getConnector().setStrokeWidth(2);
+            connector.getStyleClass().add("connector-active");
+            while (connector.getStyleClass().remove("connector-highlighted"));
         }
         else {
-            getConnector().setStroke(null);
+            while(connector.getStyleClass().remove("connector-active"));
+            while(connector.getStyleClass().remove("connector-highlighted"));
         }
+        System.out.println(connector.getStyleClass());
     }
     
     public void setActive(boolean active) {
         this.active = active;
-        updateStroke();
+        updateStateStyle();
     }
     
     public void setHighlighted(boolean highlighted) {
+        // TODO STOPSHIP something doesn't quite work right - highlight stays on after
+        // making a connection
+        if (this instanceof Input && !active) {
+            return;
+        }
         this.highlighted = highlighted;
-        updateStroke();
+        updateStateStyle();
     }
 }
 

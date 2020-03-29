@@ -7,7 +7,6 @@ import org.openpnp.openpnp_v3.FxmlComponent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Rectangle;
 
@@ -54,19 +53,17 @@ public class Editor extends FxmlComponent {
     
     private Output connectOutput;
     public void startConnect(Output output) {
+        if (this.connectOutput != null) {
+            this.connectOutput.setActive(false);
+        }
         this.connectOutput = output;
         
         /**
          * TODO STOPSHIP
-         * - Identify and highlight valid inputs.
-         * - Highlight the selected output.
          * - Create the curve immediately and connect it to the mouse
          *   so the user can see what they are doing.
+         * - Need to do all this over again if a Card is added while connecting.
          */
-        // TODO STOPSHIP this should be CSS
-        // TODO STOPSHIP actually this is all mixing concerns. We should just be setting a
-        // property on the input or output to say it's active.  We also need mouse in and mouse
-        // out to set a second property of highlighted. And these control the colors.
         output.setActive(true);
         
         for (var node : getChildren()) {
@@ -89,6 +86,9 @@ public class Editor extends FxmlComponent {
     
     public void finishConnect(Input input) {
         if (this.connectOutput == null) {
+            return;
+        }
+        if (!input.getType().isAssignableFrom(connectOutput.getType())) {
             return;
         }
         connect(
