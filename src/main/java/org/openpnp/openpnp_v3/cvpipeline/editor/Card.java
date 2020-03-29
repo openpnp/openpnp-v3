@@ -3,7 +3,9 @@ package org.openpnp.openpnp_v3.cvpipeline.editor;
 import org.openpnp.openpnp_v3.Draggable;
 import org.openpnp.openpnp_v3.FxmlComponent;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +41,10 @@ public class Card extends FxmlComponent {
     
     public void addOutput(String name, Class<?> type) {
         outputs.getChildren().add(new Output(name, type));
+    }
+    
+    public ObservableList<Node> getInputs() {
+        return inputs.getChildren();
     }
     
     public Input getInput(String name) {

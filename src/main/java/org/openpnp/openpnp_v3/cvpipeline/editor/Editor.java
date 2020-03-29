@@ -7,6 +7,7 @@ import org.openpnp.openpnp_v3.FxmlComponent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Rectangle;
 
@@ -22,7 +23,9 @@ public class Editor extends FxmlComponent {
         var card = new Card("New Stage");
         card.addInput("Image", BufferedImage.class);
         card.addInput("Amount", Integer.class);
+        card.addInput("Rectangle", Rectangle.class);
         card.addOutput("Image", BufferedImage.class);
+        card.addOutput("Amount", Integer.class);
         card.addOutput("Rectangle", Rectangle.class);
         card.setLayoutX(0);
         card.setLayoutY(0);
@@ -52,6 +55,35 @@ public class Editor extends FxmlComponent {
     private Output connectOutput;
     public void startConnect(Output output) {
         this.connectOutput = output;
+        
+        /**
+         * TODO STOPSHIP
+         * - Identify and highlight valid inputs.
+         * - Highlight the selected output.
+         * - Create the curve immediately and connect it to the mouse
+         *   so the user can see what they are doing.
+         */
+        // TODO STOPSHIP this should be CSS
+        output.getConnector().setStroke(Color.ANTIQUEWHITE);
+        output.getConnector().setStrokeWidth(2);
+        
+        for (var node : getChildren()) {
+            if (node instanceof Card) {
+                Card card = (Card) node;
+                if (card == output.getCard()) {
+                    continue;
+                }
+                for (var node1 : card.getInputs()) {
+                    if (node1 instanceof Input) {
+                        Input input = (Input) node1;
+                        if (input.getType().isAssignableFrom(output.getType())) {
+                            input.getConnector().setStroke(Color.ANTIQUEWHITE);
+                            input.getConnector().setStrokeWidth(2);
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public void finishConnect(Input input) {
@@ -63,6 +95,24 @@ public class Editor extends FxmlComponent {
                 connectOutput.getName(), 
                 input.getCard(), 
                 input.getName());
+        connectOutput.getConnector().setStroke(null);
+        
+        for (var node : getChildren()) {
+            if (node instanceof Card) {
+                Card card = (Card) node;
+                for (var node1 : card.getInputs()) {
+                    if (node1 instanceof Input) {
+                        Input input1 = (Input) node1;
+                        input1.getConnector().setStroke(null);
+//                        if (input.getType().isAssignableFrom(output.getType())) {
+//                            input.getConnector().setStroke(Color.ANTIQUEWHITE);
+//                            input.getConnector().setStrokeWidth(2);
+//                        }
+                    }
+                }
+            }
+        }
+        
         this.connectOutput = null;
     }
     

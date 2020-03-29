@@ -46,7 +46,7 @@ public abstract class InputOutput extends FxmlComponent {
         return connector;
     }
     
-    public Class getType() {
+    public Class<?> getType() {
         return type;
     }
     

@@ -12,7 +12,7 @@
 
 <fx:root type="Pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" style="-fx-background-color: #353535; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox alignment="TOP_CENTER" style="-fx-background-color: #353535; -fx-border-color: #111111; -fx-border-width: 1; -fx-background-radius: 10 10 0 0; -fx-border-radius: 10 10 0 0;">
          <children>
             <Label fx:id="name" text="Capture Image" textFill="WHITE">
                <font>
